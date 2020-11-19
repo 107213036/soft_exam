@@ -34,9 +34,9 @@ if (! $rs) {
 				<?php
 					echo "<option value='{$rs['urgent']}'>{$rs['urgent']}</option>";
 				?>
-					<option value='一般'>一般</option>
-					<option value='重要'>重要</option>
-					<option value='緊急'>緊急</option>
+					<option value='低收入戶'>低收入戶</option>
+					<option value='中低收入戶'>中低收入戶</option>
+					<option value='家庭突發因素'>家庭突發因素</option>
 					</select>
 	  <br>
 
