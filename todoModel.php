@@ -12,9 +12,9 @@ function getJobList($bossMode) {
 }
 
 // 申請
-function addJob($title,$msg, $urgent) {
+function addJob($StdName, $StdID, $Dad, $Mom, $FundType) {
 	global $conn;
-	$sql = "insert into exam (StdName, Stdapplied, Dad, Mom, FundType, TSign, PSign, SSign) values ($StdName, $Stdapplied, $Dad, $Mom, $FundType, 0, 0, 0);";
+	$sql = "insert into exam (applied,StdName, StdID, Dad, Mom, FundType,TSign, PSign, SSign, TExplain, Fund, SExplain, status) values (NULL,$StdName, $StdID, $Dad, $Mom, $FundType,0,0,0,0,0,0,0);";
 	mysqli_query($conn, $sql) or die("Insert failed, SQL query error"); //執行SQL	
 }
 

@@ -38,7 +38,7 @@ $result=getJobList($bossMode);
 <p>my Todo List !! </p>
 <hr />
 <div><?php echo $msg; ?></div><hr>
-<a href="loginForm.php">login</a> | <?php if ($bossMode==0)  echo "<a href='申請Form.php'> 申請 </a>" ?> <br>
+<a href="loginForm.php">login</a> | <?php if ($bossMode==0)  echo "<a href='applyForm.php'> 申請 </a>" ?> <br>
 <table width="1000" border="1">
   <tr>
     <td>編號</td>
@@ -63,6 +63,7 @@ while (	$rs=mysqli_fetch_assoc($result)) {
 	echo "<td>" , htmlspecialchars($rs['StdID']), "</td>";
 	echo "<td>" , htmlspecialchars($rs['Dad']), "</td>";
     echo "<td>" , htmlspecialchars($rs['Mom']), "</td>";
+    echo "<td>" , htmlspecialchars($rs['FundType']), "</td>";
     if ($bossMode==0){
         echo "<td>" , htmlspecialchars($rs['TSign']), "</td>";
         echo "<td>" , htmlspecialchars($rs['PSign']), "</td>";
