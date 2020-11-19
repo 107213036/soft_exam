@@ -2,17 +2,19 @@
 require("todoModel.php");
 
 $msgID=(int)$_GET['applied'];
+
 $act =$_GET['act'];
+$msg=$msgID;
 if ($msgID>0) {
 	switch($act) {
 		case 'psign':
 			PFinished($msgID);
 			break;
         case 'tsign':
-            TFinish($msgID);
+            TFinished($msgID);
             break;
         case 'ssign':
-            SFinish($msgID);
+            SFinished($msgID);
             break;
 		case 'reject':
 			rejectJob($msgID);

@@ -14,49 +14,49 @@ function getJobList($bossMode) {
 // 申請
 function addJob($title,$msg, $urgent) {
 	global $conn;
-	$sql = "insert into soft (StdName, Stdapplied, Dad, Mom, FundType, TSign, PSign, SSign) values ($StdName, $Stdapplied, $Dad, $Mom, $FundType, 0, 0, 0);";
+	$sql = "insert into exam (StdName, Stdapplied, Dad, Mom, FundType, TSign, PSign, SSign) values ($StdName, $Stdapplied, $Dad, $Mom, $FundType, 0, 0, 0);";
 	mysqli_query($conn, $sql) or die("Insert failed, SQL query error"); //執行SQL	
 }
 
 // 刪除申請
-function cancelJob($jobID) {
+function cancelJob($msgID) {
 	global $conn;
-	$sql = "update soft set status = 0 where Stdapplied=$jobID and status 3;";
+	$sql = "update exam set status = 0 where Stdapplied=$msgID and status 3;";
 	mysqli_query($conn,$sql);
 }
 
 // 校長核決
-function PFinished($jobID) {
+function PFinished($msgID) {
 	global $conn;
-	$sql = "update soft set PSign= 1 where applied=$jobID and PSign = 0;";
+	$sql = "update exam set PSign= 1 where applied=$msgID and PSign = 0;";
 	mysqli_query($conn,$sql) or die("MySQL query error"); //執行SQL
 	
 }
 // 老師簽章
-function TFinished($jobID) {
+function TFinished($msgID) {
 	global $conn;
-	$sql = "update soft set TSign = 1, TExplain values $TEplain where applied=$jobID and TSign = 0;";
+	$sql = "update exam set TSign = 1 where applied=$msgID and TSign = 0;";
 	mysqli_query($conn,$sql) or die("MySQL query error"); //執行SQL
 	
 }
 // 秘書簽章
-function SFinished($jobID) {
+function SFinished($msgID) {
 	global $conn;
-	$sql = "update soft set (SSign, SEplain, Fund) values (1, $SEplain, $Fund) where applied=$jobID and SSign = 0;";
+	$sql = "update exam set SSign = 1 where applied=$msgID and SSign = 0;";
 	mysqli_query($conn,$sql) or die("MySQL query error"); //執行SQL
 	
 }
  // 退回
-function rejectJob($jobID){
+function rejectJob($msgID){
 	global $conn;
-	$sql = "update soft set status = 0 where applied=$jobID and status = 2;";
+	$sql = "update exam set status = 0 where applied=$msgID and status = 2;";
 	mysqli_query($conn,$sql);
 }
 
 // 審核通過
- function OKJob($jobID){
+ function OKJob($msgID){
 	global $conn;
-	$sql = "update soft set status = 0 where applied=$jobID and status = 1;";
+	$sql = "update exam set status = 0 where applied=$msgID and status = 1;";
 	mysqli_query($conn,$sql);
 }
 

@@ -3,16 +3,13 @@ session_start();
 if (! isset($_SESSION['uID']) or $_SESSION['uID']<="") {
 	header("Location: loginForm.php");
 } 
-if ($_SESSION['uID']=='jc'){
-	$bossMode = 1;
-} 
 if ($_SESSION['uID']=='secretary'){
 	$bossMode = 2;
 }
-if ($_SESSION['uID']=='teacher'){
+else if ($_SESSION['uID']=='teacher'){
 	$bossMode = 3;
 }
-if ($_SESSION['uID']=='principal'){
+else if ($_SESSION['uID']=='principal'){
 	$bossMode = 4;
 }
 else {
@@ -56,6 +53,7 @@ $result=getJobList($bossMode);
     <td>老師備註</td>
     <td>金額</td>
     <td>秘書備註</td>
+    <td>狀態</td>
   </tr>
 <?php
 
@@ -65,7 +63,6 @@ while (	$rs=mysqli_fetch_assoc($result)) {
 	echo "<td>" , htmlspecialchars($rs['StdID']), "</td>";
 	echo "<td>" , htmlspecialchars($rs['Dad']), "</td>";
     echo "<td>" , htmlspecialchars($rs['Mom']), "</td>";
-    echo "<td>" , htmlspecialchars($rs['FundType']), "</td>";
     if ($bossMode==0){
         echo "<td>" , htmlspecialchars($rs['TSign']), "</td>";
         echo "<td>" , htmlspecialchars($rs['PSign']), "</td>";
@@ -76,7 +73,7 @@ while (	$rs=mysqli_fetch_assoc($result)) {
     }
     if ($bossMode==4){
         echo "<td>" , htmlspecialchars($rs['TSign']), "</td>";
-        echo "<td>","<a href='todoSetControl.php?act=psign&id={$rs['applied']}'>OK</a>  ","<td>";
+        echo "<td>","<a href='todoSetControl.php?act=psign&applied={$rs['applied']}'>OK</a>  ","<td>";
         echo "<td>" , htmlspecialchars($rs['SSign']), "</td>";
         echo "<td>" , htmlspecialchars($rs['TExplain']), "</td>";
         echo "<td>" , htmlspecialchars($rs['Fund']), "</td>";
@@ -85,19 +82,20 @@ while (	$rs=mysqli_fetch_assoc($result)) {
     if ($bossMode==2){
         echo "<td>" , htmlspecialchars($rs['TSign']), "</td>";
         echo "<td>" , htmlspecialchars($rs['PSign']), "</td>";
-        echo "<td>","<a href='todoSetControl.php?act=ssign&id={$rs['applied']}'>簽名</a>  ","<td>";
+        echo "<td>","<a href='todoSetControl.php?act=ssign&applied={$rs['applied']}'>簽名</a>  ","<td>";
         echo "<td>" , htmlspecialchars($rs['TExplain']), "</td>";
-        echo "<td>" , "補助", "</td>";
+        echo "<td>" , "輸入錢的頁面", "</td>";
         echo "<td>" , "意見", "</td>";
     }
     if ($bossMode==3){
-        echo "<td>" , "<a href='todoSetControl.php?act=tsign&id={$rs['applied']}'>簽名</a>  ", "</td>";
+        echo "<td>" , "<a href='todoSetControl.php?act=tsign&applied={$rs['applied']}'>簽名</a>  ", "</td>";
         echo "<td>" , htmlspecialchars($rs['PSign']), "</td>";
         echo "<td>" , htmlspecialchars($rs['SSign']), "</td>";
         echo "<td>" , "老師意見", "</td>";
         echo "<td>" , htmlspecialchars($rs['Fund']), "</td>";
         echo "<td>" , htmlspecialchars($rs['SExplain']), "</td>";
     }
+    echo "<td>" , htmlspecialchars($rs['status']), "</td>";
 	echo "</td></tr>";
 }
 ?>
