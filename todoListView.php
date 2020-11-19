@@ -72,7 +72,7 @@ while (	$rs=mysqli_fetch_assoc($result)) {
         echo "<td>" , htmlspecialchars($rs['Fund']), "</td>";
         echo "<td>" , htmlspecialchars($rs['SExplain']), "</td>";
     }
-    if ($bossMode==4){
+    else if ($bossMode==4){
         echo "<td>" , htmlspecialchars($rs['TSign']), "</td>";
         echo "<td>","<a href='todoSetControl.php?act=psign&applied={$rs['applied']}'>OK</a>  ","<td>";
         echo "<td>" , htmlspecialchars($rs['SSign']), "</td>";
@@ -80,15 +80,15 @@ while (	$rs=mysqli_fetch_assoc($result)) {
         echo "<td>" , htmlspecialchars($rs['Fund']), "</td>";
         echo "<td>" , htmlspecialchars($rs['SExplain']), "</td>";
     }
-    if ($bossMode==2){
+    else if ($bossMode==2){
         echo "<td>" , htmlspecialchars($rs['TSign']), "</td>";
         echo "<td>" , htmlspecialchars($rs['PSign']), "</td>";
-        echo "<td>","<a href='todoSetControl.php?act=ssign&applied={$rs['applied']}'>簽名</a>  ","<td>";
+        echo "<td>" , "<a href='todoSetControl.php?act=ssign&applied={$rs['applied']}'>簽名</a> ", "</td>";
         echo "<td>" , htmlspecialchars($rs['TExplain']), "</td>";
-        echo "<td>" , "輸入錢的頁面", "</td>";
-        echo "<td>" , "意見", "</td>";
+        echo "<td>" , htmlspecialchars($rs['Fund']), "</td>";
+        echo "<td>" , "秘書備註", "</td>";
     }
-    if ($bossMode==3){
+    else if ($bossMode==3){
         echo "<td>" , "<a href='todoSetControl.php?act=tsign&applied={$rs['applied']}'>簽名</a>  ", "</td>";
         echo "<td>" , htmlspecialchars($rs['PSign']), "</td>";
         echo "<td>" , htmlspecialchars($rs['SSign']), "</td>";
