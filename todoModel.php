@@ -1,5 +1,6 @@
 <?php
 require_once("dbconnect.php");
+
 function getJobList($bossMode) {
 	global $conn;
 	if ($bossMode) {
@@ -9,13 +10,6 @@ function getJobList($bossMode) {
 	}
 	$result=mysqli_query($conn,$sql) or die("DB Error: Cannot retrieve message.");
 	return $result;
-}
-
-// 申請
-function addJob($StdName, $StdID, $Dad, $Mom, $FundType) {
-	global $conn;
-	$sql = "insert into exam (applied,StdName, StdID, Dad, Mom, FundType,TSign, PSign, SSign, TExplain, Fund, SExplain, status) values (NULL,$StdName, $StdID, $Dad, $Mom, $FundType,0,0,0,0,0,0,0);";
-	mysqli_query($conn, $sql) or die("Insert failed, SQL query error"); //執行SQL	
 }
 
 // 刪除申請
@@ -28,7 +22,7 @@ function cancelJob($msgID) {
 // 校長核決
 function PFinished($msgID) {
 	global $conn;
-	$sql = "update exam set PSign= 1 where applied=$msgID and PSign = 0;";
+	$sql = "update exam set Psign=1,status=1 where applied=$msgID and PSign = 0";
 	mysqli_query($conn,$sql) or die("MySQL query error"); //執行SQL
 	
 }
@@ -42,7 +36,9 @@ function TFinished($msgID) {
 // 秘書簽章
 function SFinished($msgID) {
 	global $conn;
-	$sql = "update exam set SSign = 1 where applied=$msgID and SSign = 0;";
+	//$SExplain=mysqli_real_escape_string($conn,$_POST['SExplain']);
+	$sql = "update exam set SSign=1 where applied=$msgID and SSign = 0;";
+	
 	mysqli_query($conn,$sql) or die("MySQL query error"); //執行SQL
 	
 }
@@ -57,6 +53,13 @@ function rejectJob($msgID){
  function OKJob($msgID){
 	global $conn;
 	$sql = "update exam set status = 0 where applied=$msgID and status = 1;";
+	mysqli_query($conn,$sql);
+}
+
+//儲存意見
+function store($msgID){
+	global $conn;
+	$sql = "update exam set SExplain = $SExplain where applied=$msgID and status = 1;";
 	mysqli_query($conn,$sql);
 }
 
