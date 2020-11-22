@@ -1,6 +1,5 @@
 <?php
 require("todoModel.php");
-
 $msgID=(int)$_GET['applied'];
 
 $act =$_GET['act'];
@@ -24,9 +23,7 @@ if ($msgID>0) {
 			break;
 		case 'cancel':
 			cancelJob($msgID);
-        case 'add':
-			addJob($msgID);
-			break;
+
 		default:
 			$msg="Invalid action. Ignored.";
 			break;
