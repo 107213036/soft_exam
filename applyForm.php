@@ -9,8 +9,8 @@ require("dbconnect.php");
 <title>新增工作</title>
 </head>
 <body>
-<h1>Add New Message</h1>
-<form method="post" action="apply.php"><!--action 應該要更改-->
+<h1>Add New Application</h1>
+<form method="post" action="apply.php">
 
       申請人： <input name="StdName" type="text" id="StdName" /> <br>
 
@@ -35,5 +35,6 @@ require("dbconnect.php");
 </table>
 </body>
 </html>
+
 
 
