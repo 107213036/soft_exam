@@ -86,7 +86,7 @@ while (	$rs=mysqli_fetch_assoc($result)) {
                         <option>3000</option>
                         <option>5000</option>
                         <option>1000</option></select>", "</td>";
-        echo "<td>" , "<input name=SExplain type=text />", "</td>";
+        echo "<td>" , htmlspecialchars($rs['SExplain']), "</td>";
         echo "<td>" , htmlspecialchars($rs['status']), "</td>";
         echo "<td>" , "<a href='todoSetControl.php?act=ssign&applied={$rs['applied']}'>簽名</a> ", "</td>";
     }
@@ -94,7 +94,7 @@ while (	$rs=mysqli_fetch_assoc($result)) {
         echo "<td>" , htmlspecialchars($rs['TSign']), "</td>";
         echo "<td>" , htmlspecialchars($rs['PSign']), "</td>";
         echo "<td>" , htmlspecialchars($rs['SSign']), "</td>";
-        echo "<td>" , "<input name=TExplain type=text />", "</td>";
+        echo "<td>" , htmlspecialchars($rs['TExplain']), "</td>";
         echo "<td>" , htmlspecialchars($rs['Fund']), "</td>";
         echo "<td>" , htmlspecialchars($rs['SExplain']), "</td>";
         echo "<td>" , htmlspecialchars($rs['status']), "</td>";
