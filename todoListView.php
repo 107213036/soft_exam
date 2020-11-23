@@ -16,12 +16,6 @@ else {
 	$bossMode=0;
 }
 require("todoModel.php");
-if (isset($_GET['m'])){
-	$msg="<font color='red'>" . $_GET['m'] . "</font>";
-} else {
-	$msg="Good morning";
-}
-
 $result=getJobList($bossMode);
 
 
@@ -36,8 +30,6 @@ $result=getJobList($bossMode);
 <body>
 
 <p>my Todo List !! </p>
-<hr />
-<div><?php echo $msg; ?></div><hr>
 <a href="loginForm.php">login</a> | <?php if ($bossMode==0)  echo "<a href='applyForm.php'> 申請 </a>" ?> <br>
 <table width="1000" border="1">
   <tr>
@@ -54,11 +46,12 @@ $result=getJobList($bossMode);
     <td>金額</td>
     <td>秘書備註</td>
     <td>狀態</td>
+    <td>送出</td>
   </tr>
 <?php
 
 while (	$rs=mysqli_fetch_assoc($result)) {
-	echo "<td>" , htmlspecialchars($rs['applied']), "</td>";
+	echo "<tr><td>" , htmlspecialchars($rs['applied']), "</td>";
     echo "<td>" , htmlspecialchars($rs['StdName']), "</td>";
 	echo "<td>" , htmlspecialchars($rs['StdID']), "</td>";
 	echo "<td>" , htmlspecialchars($rs['Dad']), "</td>";
@@ -71,33 +64,45 @@ while (	$rs=mysqli_fetch_assoc($result)) {
         echo "<td>" , htmlspecialchars($rs['TExplain']), "</td>";
         echo "<td>" , htmlspecialchars($rs['Fund']), "</td>";
         echo "<td>" , htmlspecialchars($rs['SExplain']), "</td>";
+        echo "<td>" , htmlspecialchars($rs['status']), "</td>";
     }
     else if ($bossMode==4){
         echo "<td>" , htmlspecialchars($rs['TSign']), "</td>";
-        echo "<td>","<a href='todoSetControl.php?act=psign&applied={$rs['applied']}'>OK</a>  ","<td>";
+        echo "<td>" , htmlspecialchars($rs['PSign']), "</td>";
         echo "<td>" , htmlspecialchars($rs['SSign']), "</td>";
         echo "<td>" , htmlspecialchars($rs['TExplain']), "</td>";
         echo "<td>" , htmlspecialchars($rs['Fund']), "</td>";
         echo "<td>" , htmlspecialchars($rs['SExplain']), "</td>";
+        echo "<td>" , htmlspecialchars($rs['status']), "</td>";
+        echo "<td>","<a href='todoSetControl.php?act=psign&applied={$rs['applied']}'>通過</a>  ","</td>";
     }
     else if ($bossMode==2){
         echo "<td>" , htmlspecialchars($rs['TSign']), "</td>";
         echo "<td>" , htmlspecialchars($rs['PSign']), "</td>";
-        echo "<td>" , "<a href='todoSetControl.php?act=ssign&applied={$rs['applied']}'>簽名</a> ", "</td>";
+        echo "<td>" , htmlspecialchars($rs['SSign']), "</td>";
         echo "<td>" , htmlspecialchars($rs['TExplain']), "</td>";
-        echo "<td>" , htmlspecialchars($rs['Fund']), "</td>";
-        echo "<td>" , "秘書備註", "</td>";
+        echo "<td>" , "<select name='Fund' Type='text' id='Fund'>
+                        <option>0</option>
+                        <option>3000</option>
+                        <option>5000</option>
+                        <option>1000</option></select>", "</td>";
+        echo "<td>" , htmlspecialchars($rs['SExplain']), "</td>";
+        echo "<td>" , htmlspecialchars($rs['status']), "</td>";
+        echo "<td>" , "<a href='todoSetControl.php?act=ssign&applied={$rs['applied']}'>簽名</a> ", "</td>";
     }
     else if ($bossMode==3){
-        echo "<td>" , "<a href='todoSetControl.php?act=tsign&applied={$rs['applied']}'>簽名</a>  ", "</td>";
+        echo "<td>" , htmlspecialchars($rs['TSign']), "</td>";
         echo "<td>" , htmlspecialchars($rs['PSign']), "</td>";
         echo "<td>" , htmlspecialchars($rs['SSign']), "</td>";
-        echo "<td>" , "老師意見", "</td>";
+        echo "<td>" , htmlspecialchars($rs['TExplain']), "</td>";
         echo "<td>" , htmlspecialchars($rs['Fund']), "</td>";
         echo "<td>" , htmlspecialchars($rs['SExplain']), "</td>";
+        echo "<td>" , htmlspecialchars($rs['status']), "</td>";
+        echo "<td>" , "<a href='todoSetControl.php?act=tsign&applied={$rs['applied']}'>簽名</a>  ", "</td>";
+
     }
-    echo "<td>" , htmlspecialchars($rs['status']), "</td>";
-	echo "</td></tr>";
+
+    echo "</td></tr>";
 }
 ?>
 </table>
