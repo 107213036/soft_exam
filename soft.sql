@@ -35,20 +35,26 @@ CREATE TABLE `exam` (
   `Dad` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `Mom` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `FundType` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `TSign` int(11) NOT NULL,
-  `PSign` int(11) NOT NULL,
-  `SSign` int(11) NOT NULL,
-  `TExplain` text COLLATE utf8_unicode_ci NOT NULL,
+  `TSign` int(11) NOT NULL DEFAULT 0,
+  `PSign` int(11) NOT NULL DEFAULT 0,
+  `SSign` int(11) DEFAULT 0,
+  `TExplain` text COLLATE utf8_unicode_ci DEFAULT NULL,
   `Fund` int(11) NOT NULL,
-  `SExplain` text COLLATE utf8_unicode_ci NOT NULL
+  `SExplain` text COLLATE utf8_unicode_ci NOT NULL,
+  `status` int(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- 傾印資料表的資料 `exam`
 --
 
-INSERT INTO `exam` (`applied`, `StdName`, `StdID`, `Dad`, `Mom`, `FundType`, `TSign`, `PSign`, `SSign`, `TExplain`, `Fund`, `SExplain`) VALUES
-(1, '陳QQ', 107213000, '陳爸', '陳媽', '家庭突發因素', 0, 0, 0, '', 0, '');
+INSERT INTO `exam` (`applied`, `StdName`, `StdID`, `Dad`, `Mom`, `FundType`, `TSign`, `PSign`, `SSign`, `TExplain`, `Fund`, `SExplain`, `status`) VALUES
+(1, '陳QQ', 107213000, '陳爸', '陳媽', '家庭突發因素', 1, 1, 1, 'teacher say', 0, '', 1),
+(2, '徐FF', 107213099, '徐把拔', '徐馬麻', '低收入戶', 1, 0, 1, 'TExplain', 0, '', 0),
+(9, '張先生', 106213088, '張叔叔', '張阿姨', '中低收入戶', 0, 0, 1, 'TExplain', 0, '', 0),
+(10, '>???', 5, 'ijo', 'uhiu', '低收入戶', 0, 0, 1, 'TExplain', 0, '', 0),
+(11, 'uhi', 0, 'jlk', 'lkl', '低收入戶', 0, 0, 1, 'TExplain', 0, '', 0),
+(12, 'SEEEEEE', 107213039, 'SED', 'SEM', '中低收入戶', 1, 1, 1, 'TExplain', 0, 'SExplain', 1);
 
 -- --------------------------------------------------------
 
@@ -67,13 +73,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `loginID`, `password`) VALUES
-(1, 'jc', '123'),
-(2, 'siba', '0704'),
-(3, 'boss', 'boss'),
-(4, 'student', 'student'),
-(5, 'teacher', 'teacher'),
-(6, 'secretary', 'secretary'),
-(7, 'principal', 'principal');
+(1, 'student', 'student'),
+(2, 'teacher', 'teacher'),
+(3, 'secretary', 'secretary'),
+(4, 'principal', 'principal');
 
 --
 -- 已傾印資料表的索引
@@ -99,7 +102,7 @@ ALTER TABLE `user`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `exam`
 --
 ALTER TABLE `exam`
-  MODIFY `applied` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `applied` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `user`
